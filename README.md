@@ -24,7 +24,7 @@ class KneserNey:
     """
  ```
 
-This can be easily used with an NLTK corpus (see example.py).
+It is easy to create a KneserNeyLM out of an NLTK corpus (see example.py).
 
 ```python
 from nltk.corpus import gutenberg
@@ -35,6 +35,11 @@ gut_ngrams = (
     ngram for sent in gutenberg.sents() for ngram in ngrams(sent, 3,
     pad_left=True, pad_right=True, pad_symbol='<s>'))
 lm = KneserNeyLM(3, gut_ngrams, end_pad_symbol='<s>')
-for _ in range(5):
-    print(lm.generate_sentence())
+```
+
+The language model can then be used to score sentences or generate sentences.
+
+```python
+lm.score_sent(('This', 'is', 'a', 'sample', 'sentence', '.'))
+lm.generate_sentence()
 ```
