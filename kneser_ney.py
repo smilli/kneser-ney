@@ -131,6 +131,28 @@ class KneserNeyLM:
                 prefix, suffix = kgram[:-1], kgram[1:]
                 order[kgram] += last_order[suffix] + backoff[prefix]
 
+    def logprob(self, ngram):
+        for i, order in enumerate(self.lm):
+            if ngram[i:] in order:
+                return order[ngram[i:]]
+        return None
+
+    def score_sent(self, sent):
+        """
+        Return log prob of the sentence.
+
+        Params:
+            sent [tuple->string] The words in the unpadded sentence.
+        """
+        padded = (
+            (self.start_pad_symbol,) * (self.highest_order - 1) + sent +
+            (self.end_pad_symbol,))
+        sent_logprob = 0
+        for i in range(len(sent) - self.highest_order + 1):
+            ngram = sent[i:i+self.highest_order]
+            sent_logprob += self.logprob(ngram)
+        return sent_logprob
+
     def generate_sentence(self, min_length=4):
         """
         Generate a sentence using the probabilities in the language model.
