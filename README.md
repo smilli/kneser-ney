@@ -1,14 +1,14 @@
 # kneser-ney
-An implementation of [Kneser-Ney](https://en.wikipedia.org/wiki/Kneser%E2%80%93Ney_smoothing) language modeling in Python.
+An implementation of [Kneser-Ney](https://en.wikipedia.org/wiki/Kneser%E2%80%93Ney_smoothing) language modeling in Python3.
 This is not a particularly optimized implementation, but is hopefully helpful for learning and works fine for corpuses that aren't too large.
 
 # Usage
 
   The KneserNey class does language model estimation when given a sequence of ngrams.
-  
+
 ```python
 class KneserNey:
-    
+
   def __init__(self, highest_order, ngrams, start_pad_symbol='<s>', end_pad_symbol='</s>'):
     """
     Constructor for KneserNeyLM.

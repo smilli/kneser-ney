@@ -20,7 +20,7 @@ class KneserNeyLM:
         """
         self.highest_order = highest_order
         self.start_pad_symbol = start_pad_symbol
-        self.end_pad_symbol = start_pad_symbol
+        self.end_pad_symbol = end_pad_symbol
         self.lm = self.train(ngrams)
 
     def train(self, ngrams):
